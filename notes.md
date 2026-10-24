@@ -51,3 +51,61 @@ Wrong-scheme chunks in results: 5 before the filter, 0 after.
 ### Next
 - Connect Gemini (src/ask.py) to produce cited answers
 - Check whether the model says "not found" for questions outside the documents
+
+## Day 3: Gemini answers, testing, and the exclusion-list problem
+
+### What I built
+- src/ask.py: retrieves chunks (filtered to PM-KISAN), sends them to Gemini with a strict prompt, and prints an answer with sources
+- Prompt rule: answer only from the context, otherwise reply "I could not find this in the documents I have"
+- Retry on 503 errors (waits 5 seconds, up to 3 tries)
+- Changed chunking to run across page boundaries (page and page_end saved for each chunk)
+- Added debug scripts: debug_retrieval.py and debug_rank.py
+
+### First test (per-page chunks, k=4)
+| Question | Correct? | Complete? | Citations right? |
+|---|---|---|---|
+| Money per year | Yes | Yes | Yes (pages 2 and 10, checked in the PDF) |
+| Exclusions | Yes | No (4 of 8 items, 1 partial, 3 missing) | Yes |
+| Cut-off date | Yes | Yes | Yes (page 3, para 5.2) |
+| Crop insurance (not in data) | Correctly said "not found" | n/a | n/a |
+
+Checked every answer against the PDF by hand. The "extra" land-transferee point in the exclusion answer is a real rule (page 5, para 5.3), not an invented one.
+
+### Problem: exclusion list incomplete
+- The PDF has 8 exclusion items on pages 2 and 3. The answer missed the first items (institutional landholders, constitutional posts, ministers and MPs)
+- Cause: the list is cut by the page break, so retrieval got only the second half
+- Fix tried: chunk across page boundaries
+- Result: worse. With k=4 the system refused ("not found") for the exclusion question
+
+### Debugging with data
+- Checked what Gemini actually received: none of the 4 chunks mentioned exclusions, so the refusal was correct for the context it was given
+- debug_rank.py showed the list was split into 3 chunks, and their ranks for the question were 6, 7 and 29
+- The middle chunk (ranked 29) lists job titles but lacks the word "exclusion", because that heading was in another chunk
+- Lesson: re-chunking can break questions that worked before, so rerun all test questions after every change
+
+### Fix tried: k=8 (retrieve 8 chunks instead of 4)
+| Setup | Exclusion items found (of 8) |
+|---|---|
+| Per-page chunks, k=4 | 4 full + 1 partial |
+| Cross-page chunks, k=4 | 0 (refused) |
+| Cross-page chunks, k=8 | 4 full + 2 partial, 2 missing |
+
+- Still missing: pensioners and income tax payers
+- Money, cut-off and crop-insurance answers stayed correct, and crop insurance still said "not found"
+- Gemini added its own heading ("Families of Higher Economic Status") that is not in the PDF
+
+### What I learned
+- An answer can be correct on every line and still be incomplete, so evaluation must check completeness
+- A distance cutoff cannot detect "not found", so the prompt rule handles it
+- Checking answers against the source PDF caught problems that a quick read would miss
+- The first run is slow because of library startup, so a Streamlit app (loads once) will feel faster
+
+### Known problem (to fix in Week 2)
+- The exclusion list is spread over 3 chunks and retrieval only finds part of it
+- Planned fixes: hybrid search, reranker, structure-aware chunking
+- The documents are from 2020, so newer rules should be checked on pmkisan.gov.in
+
+### Next
+- Streamlit chat page
+- Add more schemes (PMFBY, KCC) so crop-insurance questions can be answered
+- Week 2: hybrid search, reranker, evaluation set
