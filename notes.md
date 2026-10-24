@@ -109,3 +109,10 @@ Checked every answer against the PDF by hand. The "extra" land-transferee point 
 - Streamlit chat page
 - Add more schemes (PMFBY, KCC) so crop-insurance questions can be answered
 - Week 2: hybrid search, reranker, evaluation set
+
+### Speed fix
+- Before: Gemini call took 98 to 178s per answer (retrieval only 0.2s)
+- Changed: (write what you changed: lighter model name and/or thinking level)
+- After: about 10 to 15s per answer
+- Money, cut-off and crop-insurance answers stayed correct
+- Exclusion answer unchanged: still missing some items (retrieval problem, Week 2)

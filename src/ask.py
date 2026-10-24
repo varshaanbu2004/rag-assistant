@@ -24,7 +24,7 @@ Question: {question}
 """
 
 
-def retrieve(question, scheme="PM-KISAN", k=8):
+def retrieve(question, scheme="PM-KISAN", k=6):
     search_text = question + " exclusion criteria farmer families not eligible excluded categories"
     res = collection.query(
         query_embeddings=embedder.encode([question]).tolist(),
@@ -35,6 +35,9 @@ def retrieve(question, scheme="PM-KISAN", k=8):
 
 
 def ask(question):
+    t0 = time.time()
+    hits = retrieve(question)
+    t1 = time.time()
     hits = retrieve(question)
     context = "\n\n".join(
         f"[{m['source']}, page {m['page']}]\n{doc}" for doc, m in hits
@@ -42,7 +45,10 @@ def ask(question):
     prompt = PROMPT.format(context=context, question=question)
     for attempt in range(3):
         try:
-            return client.models.generate_content(model=MODEL_NAME, contents=prompt).text
+            answer = client.models.generate_content(model=MODEL_NAME, contents=prompt).text
+            t2 = time.time()
+            print(f"[retrieval {t1 - t0:.1f}s | Gemini {t2 - t1:.1f}s | attempt {attempt + 1}]")
+            return answer
         except Exception as e:
             if "503" in str(e) and attempt < 2:
                 time.sleep(5)
