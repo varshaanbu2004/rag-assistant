@@ -17,6 +17,6 @@ collection.add(
     ids=[c["chunk_id"] for c in chunks],
     documents=texts,
     embeddings=embeddings,
-    metadatas=[{"source": c["source"], "page": c["page"]} for c in chunks],
+    metadatas=[{"source": c["source"], "page": c["page"], "page_end": c["page_end"], "scheme": c["scheme"]} for c in chunks],
 )
 print("Stored:", collection.count())
