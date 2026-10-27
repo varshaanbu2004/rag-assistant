@@ -116,3 +116,6 @@ Checked every answer against the PDF by hand. The "extra" land-transferee point 
 - After: about 10 to 15s per answer
 - Money, cut-off and crop-insurance answers stayed correct
 - Exclusion answer unchanged: still missing some items (retrieval problem, Week 2)
+
+### A Debugging Story
+A parameter that is accepted but never used raises no error. I found it by saving the exact prompt and checking the page labels, so log what is sent to the model.

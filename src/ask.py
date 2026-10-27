@@ -16,6 +16,10 @@ Answer ONLY from the context below. If the context does not contain the answer,
 reply exactly: "I could not find this in the documents I have."
 Use simple language. End with the sources you used as [file, page].
 If the question asks for a list of rules or conditions, end by saying the list may be incomplete and the user should verify it on the official portal.
+If the context lists several items, include every item. Check each part of the context before saying you could not find an answer.
+If the context contains a rule or list that answers the question, use it. For example, if a person or group appears in a list of exclusions, say they are excluded.
+When the context contains a list, include every item in it. Check all of the context before deciding the answer is missing.
+Only say you could not find the answer if nothing in the context relates to the question.
 
 Context:
 {context}
@@ -34,11 +38,12 @@ def retrieve(question, scheme="PM-KISAN", k=6):
     return list(zip(res["documents"][0], res["metadatas"][0]))
 
 
-def ask(question):
+def ask(question, retriever=None):
     t0 = time.time()
-    hits = retrieve(question)
+    hits = (retriever or retrieve)(question)
     t1 = time.time()
-    hits = retrieve(question)
+    hits = (retriever or retrieve)(question)
+    print("chunks sent:", len(hits), [label(m) for _, m in hits])
     context = "\n\n".join(
         f"[{m['source']}, page {m['page']}]\n{doc}" for doc, m in hits
     )

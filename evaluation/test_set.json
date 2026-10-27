@@ -1,0 +1,57 @@
+[
+  {
+    "id": "money",
+    "question": "How much money does PM-KISAN give per year?",
+    "must_contain": ["6000"]
+  },
+  {
+    "id": "exclusions",
+    "question": "Who is excluded from PM-KISAN benefits?",
+    "must_contain": [
+      "institutional land",
+      "constitutional posts",
+      "ministers",
+      "serving or retired officers",
+      "retired pensioners",
+      "paid income tax",
+      "professionals like",
+      "non-resident"
+    ]
+  },
+  {
+    "id": "cutoff",
+    "question": "What is the cut-off date for eligibility?",
+    "must_contain": ["01.02.2019", "succession"]
+  },
+  {
+    "id": "aadhaar",
+    "question": "Is Aadhaar compulsory for PM-KISAN?",
+    "must_contain": ["aadhaar seeded", "compulsor"]
+  },
+  {
+    "id": "taxpayers",
+    "question": "Do income tax payers get PM-KISAN benefits?",
+    "must_contain": ["paid income tax"]
+  },
+  {
+    "id": "pensioners",
+    "question": "Are retired pensioners eligible for PM-KISAN?",
+    "must_contain": ["retired pensioners", "10,000"]
+  },
+    {
+    "id": "false_declaration",
+    "question": "What happens if a farmer gives an incorrect self declaration?",
+    "must_contain": ["self declaration", "recovery"]
+  },
+  {
+    "id": "nri",
+    "question": "Are NRIs eligible for PM-KISAN?",
+    "must_contain": ["non-resident indians", "new beneficiaries"]
+  },
+  {
+    "id": "who_identifies",
+    "question": "Who identifies the eligible farmer families?",
+    "must_contain": ["state / ut government"]
+  }
+  
+]
