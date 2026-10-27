@@ -119,3 +119,14 @@ Checked every answer against the PDF by hand. The "extra" land-transferee point 
 
 ### A Debugging Story
 A parameter that is accepted but never used raises no error. I found it by saving the exact prompt and checking the page labels, so log what is sent to the model.
+
+## Day 4: Retrieval fixes
+
+- Baseline vector search (k=8): 60% key-phrase coverage on 6 test questions
+- Keyword search (BM25) fixed direct questions; neighbor expansion fixed the exclusion list split across chunks
+- Best setup (neighbors + keyword): 100% coverage, but longer prompts
+- Bug: ask() accepted a retriever argument but never used it, so answers still came from plain vector search. Found it by saving the prompt (last_prompt.txt) and checking page labels
+- After the fix: exclusion and income-tax answers are correct; crop insurance still says "not found"
+- Wasted time on model switching: gemini-3.8-flash took 479s and hit 503; staying on gemini-3.5-flash-lite (2 to 6s)
+- Lesson: evaluate retrieval and generation separately, and log what is sent to the model
+- Metric is key-phrase retrieval coverage, not answer accuracy
