@@ -37,23 +37,44 @@ def retrieve(question, scheme="PM-KISAN", k=6):
     )
     return list(zip(res["documents"][0], res["metadatas"][0]))
 
-
 def ask(question, retriever=None):
     t0 = time.time()
-    hits = (retriever or retrieve)(question)
+
+    # Retrieve relevant document chunks once
+    search_fn = retriever or retrieve
+    hits = search_fn(question)
+
     t1 = time.time()
-    hits = (retriever or retrieve)(question)
+
     print("chunks sent:", len(hits), [label(m) for _, m in hits])
+
     context = "\n\n".join(
-        f"[{m['source']}, page {m['page']}]\n{doc}" for doc, m in hits
+        f"[{label(m)}]\n{doc}"
+        for doc, m in hits
     )
-    prompt = PROMPT.format(context=context, question=question)
+
+    prompt = PROMPT.format(
+        context=context,
+        question=question
+    )
+
     for attempt in range(3):
         try:
-            answer = client.models.generate_content(model=MODEL_NAME, contents=prompt).text
+            answer = client.models.generate_content(
+                model=MODEL_NAME,
+                contents=prompt
+            ).text
+
             t2 = time.time()
-            print(f"[retrieval {t1 - t0:.1f}s | Gemini {t2 - t1:.1f}s | attempt {attempt + 1}]")
+
+            print(
+                f"[retrieval {t1 - t0:.2f}s | "
+                f"Gemini {t2 - t1:.2f}s | "
+                f"attempt {attempt + 1}]"
+            )
+
             return answer
+
         except Exception as e:
             if "503" in str(e) and attempt < 2:
                 time.sleep(5)

@@ -2,7 +2,14 @@
   {
     "id": "money",
     "question": "How much money does PM-KISAN give per year?",
-    "must_contain": ["6000"]
+    "must_contain": ["6000"],
+    "answer_contains": ["6000"]
+  },
+  {
+    "id": "money_rephrased",
+    "question": "How much PM-KISAN money can my family get in a year?",
+    "must_contain": ["6000"],
+    "answer_contains": ["6000"]
   },
   {
     "id": "exclusions",
@@ -16,42 +23,141 @@
       "paid income tax",
       "professionals like",
       "non-resident"
+    ],
+    "answer_contains": [
+      "institutional",
+      "constitutional",
+      "minister",
+      "pension",
+      "income tax",
+      "professional",
+      "resident"
+    ]
+  },
+  {
+    "id": "exclusions_rephrased",
+    "question": "Which farmers cannot get PM-KISAN money?",
+    "must_contain": [
+      "institutional land",
+      "constitutional posts",
+      "ministers",
+      "serving or retired officers",
+      "retired pensioners",
+      "paid income tax",
+      "professionals like",
+      "non-resident"
+    ],
+    "answer_contains": [
+      "institutional",
+      "constitutional",
+      "minister",
+      "pension",
+      "income tax",
+      "professional",
+      "resident"
     ]
   },
   {
     "id": "cutoff",
     "question": "What is the cut-off date for eligibility?",
+    "must_contain": ["01.02.2019", "succession"],
+    "answer_contains": ["2019"]
+  },
+  {
+    "id": "cutoff_land_after",
+    "question": "My land came to me after the cut-off date. Can I still get PM-KISAN?",
     "must_contain": ["01.02.2019", "succession"]
   },
   {
     "id": "aadhaar",
     "question": "Is Aadhaar compulsory for PM-KISAN?",
-    "must_contain": ["aadhaar seeded", "compulsor"]
+    "must_contain": ["aadhaar seeded", "compulsor"],
+    "answer_contains": ["aadhaar"]
   },
   {
     "id": "taxpayers",
     "question": "Do income tax payers get PM-KISAN benefits?",
-    "must_contain": ["paid income tax"]
+    "must_contain": ["paid income tax"],
+    "answer_contains": ["income tax"]
+  },
+  {
+    "id": "taxpayers_rephrased",
+    "question": "I pay income tax. Can I still get PM-KISAN?",
+    "must_contain": ["paid income tax"],
+    "answer_contains": ["income tax"]
   },
   {
     "id": "pensioners",
     "question": "Are retired pensioners eligible for PM-KISAN?",
-    "must_contain": ["retired pensioners", "10,000"]
+    "must_contain": ["retired pensioners", "10,000"],
+    "answer_contains": ["pension", "10000"]
   },
-    {
+  {
+    "id": "pensioners_rephrased",
+    "question": "My father is retired and gets a pension. Is he eligible for PM-KISAN?",
+    "must_contain": ["retired pensioners", "10,000"],
+    "answer_contains": ["pension", "10000"]
+  },
+  {
     "id": "false_declaration",
     "question": "What happens if a farmer gives an incorrect self declaration?",
-    "must_contain": ["self declaration", "recovery"]
+    "must_contain": ["self declaration", "recovery"],
+    "answer_contains": ["recover"]
   },
   {
     "id": "nri",
     "question": "Are NRIs eligible for PM-KISAN?",
-    "must_contain": ["non-resident indians", "new beneficiaries"]
+    "must_contain": ["non-resident indians", "new beneficiaries"],
+    "answer_contains": ["resident"]
   },
   {
     "id": "who_identifies",
     "question": "Who identifies the eligible farmer families?",
     "must_contain": ["state / ut government"]
+  },
+  {
+    "id": "installments",
+    "question": "How often do I get the PM-KISAN money, and how much comes each time?",
+    "must_contain": ["Rs.2000", "April-July"],
+    "answer_contains": ["2000"]
+  },
+  {
+    "id": "family_definition",
+    "question": "When PM-KISAN says farmer family, who in my family does that include?",
+    "must_contain": ["husband, wife", "owns cultivable land"],
+    "answer_contains": ["husband", "wife", "minor"]
+  },
+  {
+    "id": "inheritance_after_death",
+    "question": "If the landowner in my family dies, can the family still get PM-KISAN?",
+    "must_contain": ["family of the successors", "entitled to the benefits"]
+  },
+  {
+    "id": "land_sale_or_gift",
+    "question": "If land is transferred to me by sale or gift after the cut-off date, can I get PM-KISAN?",
+    "must_contain": ["will not be eligible", "01.02.2019"]
+  },
+  {
+    "id": "state_uploads",
+    "question": "Who uploads my details for PM-KISAN, and what details must be correct?",
+    "must_contain": ["upload the beneficiary", "Correctness of beneficiary"]
+  },
+  {
+    "id": "appeal_if_excluded",
+    "question": "If my name is missing from the list of eligible PM-KISAN farmers, can I appeal or submit my case?",
+    "must_contain": ["have been excluded", "represent their case"]
+  },
+  {
+    "id": "refuse_solar_pump",
+    "question": "Will PM-KISAN give me money to buy a solar water pump?",
+    "must_contain": []
+  },
+  {
+    "id": "refuse_kcc_limit",
+    "question": "What is the maximum Kisan Credit Card loan limit I can get?",
+    "must_contain": []
+  },
+  { "id": "exclusions_v3", "question": "Who is not allowed to take PM-KISAN?", "must_contain": [ "...same 8 phrases as exclusions... "] ,"answer_contains": ["institutional", "constitutional", "minister", "pension", "income tax", "professional", "resident"]},
+  { "id": "appeal_v2", "question": "What can I do if the officials left my name out?", "must_contain": ["have been excluded", "represent their case"] 
   }
-  
 ]

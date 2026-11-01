@@ -5,6 +5,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 import streamlit as st
 from ask import ask
+from hybrid import neighbor_retrieve
 
 st.set_page_config(page_title="Rural Scheme Advisor", page_icon="🌾")
 st.title("🌾 Rural Scheme Advisor")
@@ -27,7 +28,7 @@ if question:
     with st.chat_message("assistant"):
         with st.spinner("Searching the documents..."):
             try:
-                answer = ask(question)
+                answer = ask(question, retriever=lambda q: neighbor_retrieve(q, kv=8, kb=4, radius=1))
             except Exception as e:
                 answer = "Sorry, the AI service is busy or unavailable. Please try again in a minute."
                 st.caption(f"Technical detail: {e}")

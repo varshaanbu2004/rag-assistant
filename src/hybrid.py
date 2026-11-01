@@ -101,6 +101,102 @@ def neighbor_retrieve(question, kv=8, kb=0, radius=1):
             if 0 <= j < len(_chunks) and _chunks[j]["source"] == _chunks[i]["source"]:
                 wanted.add(j)
     return _pack([_chunks[j]["chunk_id"] for j in sorted(wanted)])
+
+def inspect_target_chunks(question, target_ids):
+    v = vector_ids(question, 30)
+    b = keyword_ids(question, 30)
+
+    print(f"\nQUESTION: {question}")
+
+    for cid in target_ids:
+        vr = v.index(cid) + 1 if cid in v else "Not in top 30"
+        br = b.index(cid) + 1 if cid in b else "Not in top 30"
+
+        print(f"{cid}: Vector rank = {vr}, BM25 rank = {br}")
+def inspect_union(question, kv=8, kb=4):
+    results = union_retrieve(question, kv, kb)
+
+    print(f"\nUNION RESULTS: {question}")
+
+    for i, (chunk, meta) in enumerate(results, start=1):
+        print(
+            f"\n{i}. {meta['source']} | "
+            f"Page {meta['page']}-{meta['page_end']}"
+        )
+        print(chunk[:300])
+from rewrite import rewrite
+def rewritten_retrieve(question, kv=8, kb=4, radius=1):
+    expanded = question + " " + rewrite(question)
+    return neighbor_retrieve(expanded, kv=kv, kb=kb, radius=radius)
+def combined_retrieve(question, kv=8, kb=4, radius=1):
+    seen, merged = set(), []
+    for hits in (
+        neighbor_retrieve(question, kv=kv, kb=kb, radius=radius),
+        rewritten_retrieve(question, kv=kv, kb=kb, radius=radius),
+    ):
+        for doc, meta in hits:
+            if doc not in seen:
+                seen.add(doc)
+                merged.append((doc, meta))
+    order = {c["text"]: i for i, c in enumerate(_chunks)}
+    merged.sort(key=lambda h: order.get(h[0], 0))
+    return merged
+
+
 if __name__ == "__main__":
     explain("Do income tax payers get PM-KISAN benefits?", "paid income tax")
     explain("Who is excluded from PM-KISAN benefits?", "retired pensioners")
+    print("\n========== SOURCE PASSAGE CHECK ==========")
+    inspect_target_chunks(
+        "Who is excluded from PM-KISAN benefits?",
+        ["pmkisan_guidelines_rev2020_c2",
+         "pmkisan_guidelines_rev2020_c3"]
+    )
+
+    inspect_target_chunks(
+        "What can eligible farmers do if they are excluded from PM-KISAN?",
+        ["pmkisan_guidelines_rev2020_c22"]
+    )
+    inspect_union(
+        "Who is excluded from PM-KISAN benefits?"
+    )
+
+    inspect_union(
+        "What can eligible farmers do if they are excluded from PM-KISAN?"
+    )
+
+    search_terms = [
+        "institutional land",
+        "constitutional posts",
+        "serving or retired officers",
+        "paid income tax",
+        "opportunity to represent their case",
+        "eligible but have been excluded"
+    ]
+
+
+    for term in search_terms:
+        print(f"\nSearching for: {term}")
+        found = False
+
+        for c in _chunks:
+            if term.lower() in c["text"].lower():
+                found = True
+                print(
+                    f"Found in {c['chunk_id']} | "
+                    f"Page: {c['page']}-{c['page_end']}"
+                )
+                print(c["text"][:500])
+
+        if not found:
+            print("NOT FOUND IN LOADED CHUNKS")
+
+        print("\n========== FULL EXCLUSION CHUNKS ==========")
+
+    for cid in ["pmkisan_guidelines_rev2020_c2",
+                "pmkisan_guidelines_rev2020_c3",
+                "pmkisan_guidelines_rev2020_c22"]:
+
+        if cid in _by_id:
+            print(f"\n\n===== {cid} =====")
+            print(_by_id[cid]["text"])
