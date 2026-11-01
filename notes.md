@@ -130,3 +130,51 @@ A parameter that is accepted but never used raises no error. I found it by savin
 - Wasted time on model switching: gemini-3.8-flash took 479s and hit 503; staying on gemini-3.5-flash-lite (2 to 6s)
 - Lesson: evaluate retrieval and generation separately, and log what is sent to the model
 - Metric is key-phrase retrieval coverage, not answer accuracy
+
+## Day 6 to 8: Query rewriting, answer evaluation, rate limits
+
+### Retrieval comparison (20 scored questions, key-phrase coverage)
+| Method | Average | Chunks sent |
+|---|---|---|
+| Vector search, k=8 | 64% | 8 |
+| Union (vector 8 + keyword 4) | 89% | 12 |
+| Neighbors (vector 8 + keyword 4, radius 1) | 91% | 22.4 |
+| Neighbors + query rewriting | 95% | 23.6 |
+| Combined (original + rewritten question) | 100% | 27.4 |
+
+- Keyword search fixed the direct questions (taxpayers, pensioners). Neighbor expansion fixed the exclusion list that was split across chunks.
+- Two questions failed in every method until rewriting: "Which farmers cannot get PM-KISAN money?" and "If my name is missing, can I appeal?". Cause: the farmer's words do not match the document's words (the guideline says "excluded" and "not eligible").
+- Query rewriting fixed both, but made `state_uploads` fail. The rewrite drifted away from the question ("Beneficiary data upload verification mandatory parameters PM-KISAN"). Searching with both the original and the rewritten question fixed it.
+- Rank fusion (my first hybrid attempt) buried a keyword hit at position 13, found with a debug script. I switched to a simple union.
+
+### Test set and answer evaluation
+- Grew the test set from 6 to 24 questions: original wording, rephrased versions, two unseen-wording questions (exclusions_v3, appeal_v2), and two should-refuse questions (solar pump, KCC limit).
+- evaluation/evaluate.py scores retrieval; evaluation/evaluate_answers.py checks the final Gemini answers.
+- Automatic answer checks: 17/17 passed. 7 questions need manual review.
+- Manual review against the PDF: it doesn't fully given the correct statement but it matched with the right answer.
+- Refusal questions: solar pump and KCC limit both returned "I could not find this in the documents I have."
+
+### Problems and fixes
+- Every answer in the CSV said "ERROR: name 'question' is not defined". The script was using a variable that did not exist in its loop, and marked errors as FAIL. Fix: count errors separately and use t["question"].
+- 429 RESOURCE_EXHAUSTED: the free tier allows 15 requests per minute, and each question makes two Gemini calls (rewrite and answer). Fixes: wait 12 seconds between questions, wait 60 seconds on a retry, and cache rewrites in evaluation/rewrite_cache.json.
+- The main model (gemini-3.8-flash) took 479 seconds for one answer and then returned 503. Staying on gemini-3.5-flash-lite (1 to 5 seconds per answer).
+- With the combined retriever, a question sends 20 to 33 chunks. Streamlit answers take about 10 to 12 seconds.
+- Deleted one-off scripts (search_test, try_questions, try_rewrite, debug_app, debug_ask, debug_retrieval, test_neighbor).
+
+### What I learned
+- A perfect retrieval score does not guarantee a correct answer, so retrieval and generation must be evaluated separately.
+- A parameter that is accepted but never used raises no error. Logging what is sent to the model found it.
+- Rephrased questions exposed a weakness that the original wording hid.
+- Fix the system, not the test: only edit a test phrase if the phrase itself is wrong.
+- The score is key-phrase retrieval coverage on a small test set, not answer accuracy.
+
+### Known limitations
+- The guidelines are from 2020, so newer rules may be missing (check pmkisan.gov.in).
+- No conversation memory: follow-up questions are treated as new questions.
+- Free-tier rate limits (15 requests per minute) restrict heavy use.
+- The exclusion list can still be incomplete when Gemini skips items, so the answer ends with a "verify on the official portal" note.
+
+### Next
+- Add PMFBY (crop insurance) with scheme routing
+- Build a 40 to 50 question evaluation set and run RAGAS
+- Logging, feedback buttons, deployment
