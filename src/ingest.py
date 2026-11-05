@@ -6,7 +6,7 @@ CHUNK_SIZE = 800
 OVERLAP = 150
 SCHEME_BY_PREFIX = {
     "pmkisan_": "PM-KISAN",
-    "pmkmy_": "PM Kisan Maan-Dhan",
+    "pmfby_": "PMFBY",
 }
 
 

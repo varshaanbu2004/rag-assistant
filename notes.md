@@ -131,7 +131,7 @@ A parameter that is accepted but never used raises no error. I found it by savin
 - Lesson: evaluate retrieval and generation separately, and log what is sent to the model
 - Metric is key-phrase retrieval coverage, not answer accuracy
 
-## Day 6 to 8: Query rewriting, answer evaluation, rate limits
+## Day 5 to 8: Query rewriting, answer evaluation, rate limits
 
 ### Retrieval comparison (20 scored questions, key-phrase coverage)
 | Method | Average | Chunks sent |

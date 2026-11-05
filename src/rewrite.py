@@ -1,5 +1,6 @@
 import json
 import os
+import time
 
 from ask import client, MODEL_NAME
 
@@ -28,4 +29,5 @@ def rewrite(question):
     _cache[question] = text
     with open(CACHE_FILE, "w", encoding="utf-8") as f:
         json.dump(_cache, f)
+    time.sleep(4)
     return text

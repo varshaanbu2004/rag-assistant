@@ -29,7 +29,6 @@ Question: {question}
 
 
 def retrieve(question, scheme="PM-KISAN", k=6):
-    search_text = question + " exclusion criteria farmer families not eligible excluded categories"
     res = collection.query(
         query_embeddings=embedder.encode([question]).tolist(),
         n_results=k,
@@ -83,8 +82,6 @@ def ask(question, retriever=None):
 def label(m):
     p = m["page"] if m["page"] == m["page_end"] else f"{m['page']}-{m['page_end']}"
     return f"{m['source']}, page {p}"
-    context = "\n\n".join(f"[{label(m)}]\n{doc}" for doc, m in hits)
-
 
 
 if __name__ == "__main__":

@@ -6,8 +6,7 @@ from ingest import load_chunks
 def norm(text):
     return " ".join(text.lower().split())
 
-
-corpus = norm(" | ".join(c["text"] for c in load_chunks() if c["scheme"] == "PM-KISAN"))
+corpus = norm(" | ".join(c["text"] for c in load_chunks()))
 
 with open("evaluation/test_set.json", encoding="utf-8") as f:
     TESTS = json.load(f)
@@ -24,7 +23,7 @@ def evaluate(name, retrieve_fn):
     for t in TESTS:
         if not t["must_contain"]:
             continue
-        hits = retrieve_fn(t["question"])
+        hits = retrieve_fn(t["question"], t.get("scheme"))
         sizes.append(len(hits))
         text = norm(" | ".join(doc for doc, _ in hits))
         missing = [p for p in t["must_contain"] if norm(p) not in text]
@@ -34,10 +33,8 @@ def evaluate(name, retrieve_fn):
     print(f"AVERAGE: {sum(scores) / len(scores):.0%} | avg chunks sent: {sum(sizes) / len(sizes):.1f}")
 
 if __name__ == "__main__":
-    from hybrid import union_retrieve, neighbor_retrieve,rewritten_retrieve,combined_retrieve
+    from hybrid import neighbor_retrieve, combined_retrieve
 
-    evaluate("vector, k=8", lambda q: retrieve(q, k=8))
-    #evaluate("union: vector 8 + keyword 4", lambda q: union_retrieve(q, kv=8, kb=4))
-    #evaluate("neighbors: vector 8 + keyword 4, radius 1", lambda q: neighbor_retrieve(q, kv=8, kb=4, radius=1))
-    evaluate("neighbors 8+4 with query rewriting", lambda q: rewritten_retrieve(q))
-    evaluate("combined: original + rewritten", lambda q: combined_retrieve(q))
+    evaluate("vector, k=8", lambda q, s=None: retrieve(q, scheme=s or "PM-KISAN", k=8))
+    evaluate("neighbors 8+4", lambda q, s=None: neighbor_retrieve(q, scheme=s))
+    evaluate("combined: original + rewritten", lambda q, s=None: combined_retrieve(q, scheme=s))

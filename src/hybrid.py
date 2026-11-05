@@ -5,6 +5,7 @@ from ingest import load_chunks
 
 STOP = {"the", "a", "an", "is", "are", "of", "to", "for", "do", "does", "what",
         "who", "how", "in", "on", "and", "or", "get", "can", "i", "be", "by", "from"}
+EXCLUDED_SOURCES = {"pmkisan_faq.pdf"}
 
 
 def tokens(text):
@@ -12,9 +13,22 @@ def tokens(text):
 
 
 # Keyword index built in memory from the same chunks as the vector index
-_chunks = [c for c in load_chunks() if c["scheme"] == "PM-KISAN"]
+_chunks = load_chunks()
 _by_id = {c["chunk_id"]: c for c in _chunks}
 _bm25 = BM25Okapi([tokens(c["text"]) for c in _chunks])
+
+SCHEME_WORDS = {
+    "PMFBY": ["pmfby", "fasal bima", "crop insurance", "insurance", "crop loss"],
+    "PM-KISAN": ["pm-kisan", "pm kisan", "pmkisan", "kisan samman"],
+    "PM Kisan Maan-Dhan": ["maan-dhan", "maandhan", "maan dhan", "pm-kmy", "pmkmy"],
+}
+
+def detect_scheme(question):
+    q = question.lower()
+    found = {s for s, words in SCHEME_WORDS.items() if any(w in q for w in words)}
+    if "PM Kisan Maan-Dhan" in found:
+        found.discard("PM-KISAN")          # "PM Kisan Maan-Dhan" contains "pm kisan"
+    return found.pop() if len(found) == 1 else None
 
 
 def _meta(c):
@@ -26,19 +40,35 @@ def _pack(ids):
     return [(_by_id[i]["text"], _meta(_by_id[i])) for i in ids]
 
 
-def keyword_ids(question, n=20):
+def keyword_ids(question, n=20, scheme=None):
     scores = _bm25.get_scores(tokens(question))
     order = sorted(range(len(_chunks)), key=lambda i: scores[i], reverse=True)
-    return [_chunks[i]["chunk_id"] for i in order[:n] if scores[i] > 0]
+    out = []
+    for i in order:
+        if scores[i] <= 0 or len(out) >= n:
+            break
+        if _chunks[i]["source"] in EXCLUDED_SOURCES:
+            continue
+        if scheme and _chunks[i]["scheme"] != scheme:
+            continue
+        out.append(_chunks[i]["chunk_id"])
+    return out
 
-
-def vector_ids(question, n=20):
+def vector_ids(question, n=20, scheme=None):
+    extra = {"where": {"scheme": scheme}} if scheme else {}
     res = collection.query(
         query_embeddings=embedder.encode([question]).tolist(),
-        n_results=n,
-        where={"scheme": "PM-KISAN"},
+        n_results=n * 3,
+        **extra,
     )
-    return res["ids"][0]
+    out = []
+    for cid, meta in zip(res["ids"][0], res["metadatas"][0]):
+        if meta["source"] in EXCLUDED_SOURCES:
+            continue
+        out.append(cid)
+        if len(out) >= n:
+            break
+    return out
 
 
 def keyword_retrieve(question, k=8):
@@ -83,16 +113,16 @@ def union_retrieve(question, kv=8, kb=4):
     return _pack(ids)
 
 
-def neighbor_retrieve(question, kv=8, kb=0, radius=1):
-    ids = list(vector_ids(question, kv))
+def neighbor_retrieve(question, kv=8, kb=4, radius=1, scheme=None):
+    scheme = scheme or detect_scheme(question)
+    ids = list(vector_ids(question, kv, scheme))
     added = 0
-    for cid in keyword_ids(question, 20):
+    for cid in keyword_ids(question, 20, scheme):
         if added >= kb:
             break
         if cid not in ids:
             ids.append(cid)
             added += 1
-
     pos = {c["chunk_id"]: i for i, c in enumerate(_chunks)}
     wanted = set()
     for cid in ids:
@@ -101,6 +131,7 @@ def neighbor_retrieve(question, kv=8, kb=0, radius=1):
             if 0 <= j < len(_chunks) and _chunks[j]["source"] == _chunks[i]["source"]:
                 wanted.add(j)
     return _pack([_chunks[j]["chunk_id"] for j in sorted(wanted)])
+
 
 def inspect_target_chunks(question, target_ids):
     v = vector_ids(question, 30)
@@ -125,14 +156,20 @@ def inspect_union(question, kv=8, kb=4):
         )
         print(chunk[:300])
 from rewrite import rewrite
-def rewritten_retrieve(question, kv=8, kb=4, radius=1):
-    expanded = question + " " + rewrite(question)
-    return neighbor_retrieve(expanded, kv=kv, kb=kb, radius=radius)
-def combined_retrieve(question, kv=8, kb=4, radius=1):
+def rewritten_retrieve(question, kv=8, kb=4, radius=1, scheme=None):
+    scheme = scheme or detect_scheme(question)
+    rewritten = (rewrite(question) or "").strip()
+    if not rewritten:
+        return neighbor_retrieve(question, kv, kb, radius, scheme)
+    expanded = f"{question} {rewritten}"
+    return neighbor_retrieve(expanded, kv, kb, radius, scheme)
+
+def combined_retrieve(question, kv=8, kb=4, radius=1, scheme=None):
+    scheme = scheme or detect_scheme(question)
     seen, merged = set(), []
     for hits in (
-        neighbor_retrieve(question, kv=kv, kb=kb, radius=radius),
-        rewritten_retrieve(question, kv=kv, kb=kb, radius=radius),
+        neighbor_retrieve(question, kv, kb, radius, scheme),
+        rewritten_retrieve(question, kv, kb, radius, scheme),
     ):
         for doc, meta in hits:
             if doc not in seen:
@@ -141,7 +178,6 @@ def combined_retrieve(question, kv=8, kb=4, radius=1):
     order = {c["text"]: i for i, c in enumerate(_chunks)}
     merged.sort(key=lambda h: order.get(h[0], 0))
     return merged
-
 
 if __name__ == "__main__":
     explain("Do income tax payers get PM-KISAN benefits?", "paid income tax")
