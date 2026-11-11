@@ -111,10 +111,10 @@ def union_retrieve(question, kv=8, kb=4):
 def neighbor_retrieve(question, kv=8, kb=4, radius=1, scheme=None):
     scheme = scheme or detect_scheme(question)
     # Tier 1: top vector hits (ranks 1-kv) + keyword hits, expanded with neighbors
-    v_all = vector_ids(question, 20, scheme)
+    v_all = vector_ids(question, 30, scheme)
     tier1 = list(v_all[:kv])
     added = 0
-    for cid in keyword_ids(question, 20, scheme):
+    for cid in keyword_ids(question, 50, scheme):
         if added >= kb:
             break
         if cid not in tier1:
@@ -127,9 +127,9 @@ def neighbor_retrieve(question, kv=8, kb=4, radius=1, scheme=None):
         for j in range(i - radius, i + radius + 1):
             if 0 <= j < len(_chunks) and _chunks[j]["source"] == _chunks[i]["source"]:
                 wanted_idx.add(j)
-    # Tier 2: vector ranks 9-20 added alone (no neighbors), keeps scheme filter
+    # Tier 2: vector ranks 9-30 added alone (no neighbors), keeps scheme filter
     tier1_ids = {_chunks[j]["chunk_id"] for j in wanted_idx}
-    tier2 = [cid for cid in v_all[kv:20] if cid not in tier1_ids]
+    tier2 = [cid for cid in v_all[kv:30] if cid not in tier1_ids]
     all_ids = list(tier1_ids | set(tier2))
     all_ids.sort(key=lambda cid: pos[cid])
     return _pack(all_ids)
