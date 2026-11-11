@@ -115,22 +115,29 @@ def union_retrieve(question, kv=8, kb=4):
 
 def neighbor_retrieve(question, kv=8, kb=4, radius=1, scheme=None):
     scheme = scheme or detect_scheme(question)
-    ids = list(vector_ids(question, kv, scheme))
+    # Tier 1: top vector hits (ranks 1-kv) + keyword hits, expanded with neighbors
+    v_all = vector_ids(question, 20, scheme)
+    tier1 = list(v_all[:kv])
     added = 0
     for cid in keyword_ids(question, 20, scheme):
         if added >= kb:
             break
-        if cid not in ids:
-            ids.append(cid)
+        if cid not in tier1:
+            tier1.append(cid)
             added += 1
     pos = {c["chunk_id"]: i for i, c in enumerate(_chunks)}
-    wanted = set()
-    for cid in ids:
+    wanted_idx = set()
+    for cid in tier1:
         i = pos[cid]
         for j in range(i - radius, i + radius + 1):
             if 0 <= j < len(_chunks) and _chunks[j]["source"] == _chunks[i]["source"]:
-                wanted.add(j)
-    return _pack([_chunks[j]["chunk_id"] for j in sorted(wanted)])
+                wanted_idx.add(j)
+    # Tier 2: vector ranks 9-20 added alone (no neighbors), keeps scheme filter
+    tier1_ids = {_chunks[j]["chunk_id"] for j in wanted_idx}
+    tier2 = [cid for cid in v_all[kv:20] if cid not in tier1_ids]
+    all_ids = list(tier1_ids | set(tier2))
+    all_ids.sort(key=lambda cid: pos[cid])
+    return _pack(all_ids)
 
 
 def inspect_target_chunks(question, target_ids):
