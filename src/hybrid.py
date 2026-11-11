@@ -5,7 +5,6 @@ from ingest import load_chunks
 
 STOP = {"the", "a", "an", "is", "are", "of", "to", "for", "do", "does", "what",
         "who", "how", "in", "on", "and", "or", "get", "can", "i", "be", "by", "from"}
-EXCLUDED_SOURCES = {"pmkisan_faq.pdf"}
 
 
 def tokens(text):
@@ -47,8 +46,6 @@ def keyword_ids(question, n=20, scheme=None):
     for i in order:
         if scores[i] <= 0 or len(out) >= n:
             break
-        if _chunks[i]["source"] in EXCLUDED_SOURCES:
-            continue
         if scheme and _chunks[i]["scheme"] != scheme:
             continue
         out.append(_chunks[i]["chunk_id"])
@@ -63,8 +60,6 @@ def vector_ids(question, n=20, scheme=None):
     )
     out = []
     for cid, meta in zip(res["ids"][0], res["metadatas"][0]):
-        if meta["source"] in EXCLUDED_SOURCES:
-            continue
         out.append(cid)
         if len(out) >= n:
             break

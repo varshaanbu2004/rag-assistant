@@ -66,3 +66,4 @@ Help me with the next step only, in task-wise form (task, reason, expected impac
 
 ## Log (the agent appends here after every task)
 - [date] task, files changed, scores before and after, open problems
+- [2026-11-11] Task A: `src/hybrid.py` `neighbor_retrieve` — tier-1 unchanged (top kv vector + kb keyword expanded with neighbors, scheme filter kept); added tier-2 vector ranks 9-20 (same filtered candidates) appended alone, no neighbors, deduped vs tier-1. `EXCLUDED_SOURCES={"pmkisan_faq.pdf"}` kept (see report). Scores (combined, `python src/evaluate.py` logic, no Gemini, cached rewrites): neighbors AVERAGE 93% / 26.3 chunks, combined AVERAGE 100% / 29.7 chunks; no questions <100% in combined (state_uploads, exclusions, exclusions_v3, appeal_v2 all 100%). Open: Task B pending (verify pmfby_ files, run build_index.py, report chunk counts) — not started.
