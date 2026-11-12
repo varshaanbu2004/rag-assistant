@@ -288,5 +288,146 @@
       "represent their case"
     ],
     "scheme": "PM-KISAN"
+  },
+  {
+    "id": "pmfby_risks",
+    "question": "Which risks are covered under PMFBY crop insurance?",
+    "must_contain": [
+      "prevented sowing",
+      "localized calamities"
+    ],
+    "scheme": "PMFBY",
+    "tag": "direct"
+  },
+  {
+    "id": "pmfby_premium",
+    "question": "How much premium does a farmer pay for crop insurance under PMFBY?",
+    "must_contain": [
+      "1.5%",
+      "Maximum Premium Rate payable by farmer"
+    ],
+    "scheme": "PMFBY",
+    "tag": "direct"
+  },
+  {
+    "id": "pmfby_cutoff",
+    "question": "What is the last date to enrol for crop insurance?",
+    "must_contain": [
+      "cut-off date",
+      "cut off date"
+    ],
+    "scheme": "PMFBY",
+    "tag": "direct"
+  },
+  {
+    "id": "pmfby_report_loss",
+    "question": "How do I report crop damage from hailstorm or flooding?",
+    "must_contain": [
+      "72 hours",
+      "localized calamities"
+    ],
+    "scheme": "PMFBY",
+    "tag": "direct"
+  },
+  {
+    "id": "pmfby_eligibility",
+    "question": "Who can enrol for PMFBY?",
+    "must_contain": [
+      "non-loanee",
+      "loanee farmers"
+    ],
+    "scheme": "PMFBY",
+    "tag": "direct"
+  },
+  {
+    "id": "pmfby_flood_rephrased",
+    "question": "My crop got destroyed by flood. Do I get insurance money?",
+    "must_contain": [
+      "inundation",
+      "localized calamities"
+    ],
+    "scheme": "PMFBY",
+    "tag": "rephrased"
+  },
+  {
+    "id": "pmfby_premium_rephrased",
+    "question": "How much money do I have to pay to insure my wheat?",
+    "must_contain": [
+      "1.5%",
+      "Maximum Premium Rate payable by farmer"
+    ],
+    "scheme": "PMFBY",
+    "tag": "rephrased"
+  },
+  {
+    "id": "pmfby_loan_rephrased",
+    "question": "I took a crop loan. Is insurance automatic for me?",
+    "must_contain": [
+      "loanee farmers",
+      "non-loanee"
+    ],
+    "scheme": "PMFBY",
+    "tag": "rephrased"
+  },
+  {
+    "id": "pmfby_unseen_sowing",
+    "question": "What happens if my crop fails to sprout because of drought at sowing time?",
+    "must_contain": [
+      "prevented sowing"
+    ],
+    "scheme": "PMFBY",
+    "tag": "unseen"
+  },
+  {
+    "id": "pmfby_unseen_postharvest",
+    "question": "Is there compensation if my cut crop gets wet in the rain after harvest?",
+    "must_contain": [
+      "two weeks from harvesting",
+      "two weeks from harvesting"
+    ],
+    "scheme": "PMFBY",
+    "tag": "unseen"
+  },
+  {
+    "id": "refuse_tractor_loan",
+    "question": "How do I get a loan to buy a tractor?",
+    "must_contain": [],
+    "scheme": null,
+    "tag": "refuse"
+  },
+  {
+    "id": "refuse_mgnrega",
+    "question": "How many days of paid work does MGNREGA guarantee?",
+    "must_contain": [],
+    "scheme": null,
+    "tag": "refuse"
+  },
+  {
+    "id": "cross_apply_insurance",
+    "question": "How do I apply for crop insurance?",
+    "must_contain": [
+      "national crop insurance portal",
+      "crop insurance portal"
+    ],
+    "scheme": null,
+    "tag": "cross"
+  },
+  {
+    "id": "cross_aadhaar_insurance",
+    "question": "Do I need Aadhaar for crop insurance?",
+    "must_contain": [
+      "aadhaar"
+    ],
+    "scheme": null,
+    "tag": "cross"
+  },
+  {
+    "id": "cross_aadhaar_noscheme",
+    "question": "Is Aadhaar compulsory?",
+    "must_contain": [
+      "aadhaar seeded"
+    ],
+    "scheme": null,
+    "tag": "cross"
   }
 ]
