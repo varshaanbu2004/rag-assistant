@@ -166,18 +166,38 @@ def rewritten_retrieve(question, kv=8, kb=4, radius=1, scheme=None):
     expanded = f"{question} {rewritten}"
     return neighbor_retrieve(expanded, kv, kb, radius, scheme)
 
-def combined_retrieve(question, kv=8, kb=4, radius=1, scheme=None):
-    scheme = scheme or detect_scheme(question)
+def _merge_for_scheme(question, rewrite_text, kv, kb, radius, scheme):
+    """Merge the original-question and rewritten-question retrieval paths for
+    one scheme. `rewrite_text` is computed once by the caller, so no extra
+    Gemini calls are made."""
     seen, merged = set(), []
-    for hits in (
-        neighbor_retrieve(question, kv, kb, radius, scheme),
-        rewritten_retrieve(question, kv, kb, radius, scheme),
-    ):
-        for doc, meta in hits:
+    for q in (question, f"{question} {rewrite_text}" if rewrite_text else question):
+        for doc, meta in neighbor_retrieve(q, kv, kb, radius, scheme):
             if doc not in seen:
                 seen.add(doc)
                 merged.append((doc, meta))
+    return merged
+
+
+def combined_retrieve(question, kv=8, kb=4, radius=1, scheme=None):
+    scheme = scheme or detect_scheme(question)
     order = {c["text"]: i for i, c in enumerate(_chunks)}
+    if scheme:
+        # Scheme detected: existing behavior, one Gemini rewrite call per question.
+        rewrite_text = (rewrite(question) or "").strip()
+        merged = _merge_for_scheme(question, rewrite_text, kv, kb, radius, scheme)
+    else:
+        # No scheme detected: try both schemes once each with a smaller
+        # candidate set, interleave hits in relevance order, cap at 40,
+        # then sort by chunk position at the end for display.
+        rewrite_text = (rewrite(question) or "").strip()
+        seen, merged = set(), []
+        for s in ("PM-KISAN", "PMFBY"):
+            for doc, meta in _merge_for_scheme(question, rewrite_text, 5, 2, 1, s):
+                if doc not in seen:
+                    seen.add(doc)
+                    merged.append((doc, meta))
+        merged = merged[:40]
     merged.sort(key=lambda h: order.get(h[0], 0))
     return merged
 
