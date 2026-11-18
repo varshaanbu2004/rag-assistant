@@ -6,3 +6,4 @@ chroma_db/
 .sf/
 last_prompt.txt
 evaluation/rewrite_cache.json
+evaluation/test_set.backup.json

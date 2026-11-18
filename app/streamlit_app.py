@@ -37,8 +37,8 @@ if question:
                     return_hits=True
                 )
             except Exception:
-                answer = "Sorry, the AI service is busy or unavailable. Please try again in a minute."
-                hits = []
+                st.error("The service is busy or unavailable. Please try again in a minute.")
+                st.stop()
 
         st.markdown(answer)
         if hits:
