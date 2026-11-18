@@ -5,11 +5,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 import streamlit as st
 from ask import ask
-from hybrid import neighbor_retrieve
+from hybrid import combined_retrieve
 
 st.set_page_config(page_title="Rural Scheme Advisor", page_icon="🌾")
 st.title("🌾 Rural Scheme Advisor")
-st.caption("Ask about PM-KISAN. Answers come from official documents and show their sources. Please verify with the official portal (pmkisan.gov.in) before acting.")
+st.caption("Ask about PM-KISAN or PMFBY. Answers come from official documents and show their sources. Please verify with the official portal (pmkisan.gov.in) before acting.")
+
+scheme_choice = st.sidebar.selectbox("Scheme", ["Auto-detect", "PM-KISAN", "PMFBY"])
+scheme = None if scheme_choice == "Auto-detect" else scheme_choice
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -28,11 +31,21 @@ if question:
     with st.chat_message("assistant"):
         with st.spinner("Searching the documents..."):
             try:
-                answer = ask(question, retriever=lambda q: neighbor_retrieve(q, kv=8, kb=4, radius=1))
-            except Exception as e:
+                answer, hits = ask(
+                    question,
+                    retriever=lambda q: combined_retrieve(q, scheme=scheme),
+                    return_hits=True
+                )
+            except Exception:
                 answer = "Sorry, the AI service is busy or unavailable. Please try again in a minute."
-                st.caption(f"Technical detail: {e}")
+                hits = []
+
         st.markdown(answer)
-        st.caption("Please verify with the official portal (pmkisan.gov.in) before acting.")
+        if hits:
+            st.caption("Cited sources:")
+            for _, meta in hits:
+                p = meta["page"] if meta["page"] == meta["page_end"] else f"{meta['page']}-{meta['page_end']}"
+                st.caption(f"- {meta['source']}, page {p}")
+        st.caption("Documents are from 2020 and 2023. Verify on the official portal.")
 
     st.session_state.messages.append({"role": "assistant", "content": answer})

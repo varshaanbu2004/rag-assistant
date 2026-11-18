@@ -36,7 +36,7 @@ def retrieve(question, scheme="PM-KISAN", k=6):
     )
     return list(zip(res["documents"][0], res["metadatas"][0]))
 
-def ask(question, retriever=None):
+def ask(question, retriever=None, return_hits=False):
     t0 = time.time()
 
     # Retrieve relevant document chunks once
@@ -57,6 +57,7 @@ def ask(question, retriever=None):
         question=question
     )
 
+    last_error = None
     for attempt in range(3):
         try:
             answer = client.models.generate_content(
@@ -72,11 +73,18 @@ def ask(question, retriever=None):
                 f"attempt {attempt + 1}]"
             )
 
-            return answer
+            return (answer, hits) if return_hits else answer
 
         except Exception as e:
-            if "503" in str(e) and attempt < 2:
+            last_error = e
+            s = str(e)
+            if "503" in s and attempt < 2:
                 time.sleep(5)
+                continue
+            if ("429" in s or "quota" in s
+                    or "resource_exhausted" in s
+                    or "rate limit" in s) and attempt < 2:
+                time.sleep(60)
                 continue
             raise
 def label(m):
