@@ -1,13 +1,27 @@
 import sys
+import subprocess
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 import streamlit as st
-from ask import ask
-from hybrid import combined_retrieve
 
 st.set_page_config(page_title="Rural Scheme Advisor", page_icon="🌾")
+
+_ROOT = Path(__file__).resolve().parent.parent
+_chroma_dir = _ROOT / "chroma_db"
+_build_script = _ROOT / "src" / "build_index.py"
+_raw_dir = _ROOT / "data" / "raw"
+
+if not (_chroma_dir.exists() and any(_chroma_dir.iterdir())):
+    if not list(_raw_dir.glob("*.pdf")):
+        st.error("No documents found in data/raw. Add the PDF files before starting the app.")
+    else:
+        with st.spinner("Index not found. Building from documents..."):
+            subprocess.run([sys.executable, str(_build_script)], check=False, cwd=str(_ROOT))
+
+from ask import ask
+from hybrid import combined_retrieve
 st.title("🌾 Rural Scheme Advisor")
 st.caption("Ask about PM-KISAN or PMFBY. Answers come from official documents and show their sources. Please verify with the official portal (pmkisan.gov.in) before acting.")
 
