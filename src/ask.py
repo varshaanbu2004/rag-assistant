@@ -6,8 +6,15 @@ from google import genai
 from sentence_transformers import SentenceTransformer
 
 load_dotenv()
-MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
-client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-3.8-flash-lite")
+_api_key = os.getenv("GOOGLE_API_KEY")
+if not _api_key:
+    try:
+        import streamlit as st
+        _api_key = st.secrets.get("GOOGLE_API_KEY", "")
+    except Exception:
+        pass
+client = genai.Client(api_key=_api_key)
 embedder = SentenceTransformer("all-MiniLM-L6-v2")
 collection = chromadb.PersistentClient(path="chroma_db").get_collection("schemes")
 
