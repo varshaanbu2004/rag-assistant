@@ -1,129 +1,11 @@
-id,question,auto_result,answer
-money,How much money does PM-KISAN give per year?,PASS,"Under the PM-KISAN scheme, an amount of Rs. 6000/- per year is released by the Central Government online directly into the bank accounts of eligible farmers [pmkisan_guidelines_rev2020.pdf, page 2]."
-money_rephrased,How much PM-KISAN money can my family get in a year?,PASS,"Under the PM-KISAN scheme, your family can get an amount of Rs. 6,000/- per year [pmkisan_guidelines_rev2020.pdf, page 2]. This money is released by the Central Government in three equal installments of Rs. 2,000/- every 4 months (trimester) [pmkisan_guidelines_rev2020.pdf, page 10].
+id,scheme,answer
+money,PM-KISAN,"Under the PM-KISAN scheme, an amount of Rs.6000/- per year is released by the Central Government online directly into the bank accounts of eligible farmers [pmkisan_guidelines_rev2020, page 2].
 
-Sources: [pmkisan_guidelines_rev2020.pdf, page 2, 10]"
-exclusions,Who is excluded from PM-KISAN benefits?,PASS,"Based on the documents, the following categories of beneficiaries of higher economic status are not eligible for benefits under the scheme:
-
-(a) All Institutional Land holders.
-(b) Farmer families in which one or more of its members belong to the following categories:
-- Former and present holders of constitutional posts.
-- Former and present Ministers / State Ministers and former / present Members of Lok Sabha / Rajya Sabha / State Legislative Assemblies / State Legislative Councils, former and present Mayors of Municipal Corporations, former and present Chairpersons of District Panchayats.
-- All serving or retired officers and employees of Central / State Government Ministries / Offices / Departments and their field units, Central or State PSEs and Attached offices / Autonomous Institutions under Government as well as regular employees of the Local Bodies (Excluding Multi Tasking Staff / Class IV / Group D employees).
-- All superannuated / retired pensioners whose monthly pension is Rs.10,000/- or more (Excluding Multi Tasking Staff / Class IV / Group D employees).
-- All Persons who paid Income Tax in last assessment year.
-- Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with Professional bodies and carrying out profession by undertaking practices.
-(c) In case of new beneficiaries being uploaded on the PM-KISAN Portal, all land holding farmers’ families who are Non-resident Indians (NRIs) in terms of the provisions of the Income Tax Act, 1961.
-
-Please note that this list may be incomplete and you should verify it on the official portal.
-
-Sources: [pmkisan_guidelines_rev2020.pdf, page 2-3]"
-exclusions_rephrased,Which farmers cannot get PM-KISAN money?,PASS,"Based on the documents provided, the following categories of beneficiaries of higher economic status and other specific conditions are not eligible for benefits under the PM-KISAN scheme:
-
-(a) All Institutional Land holders.
-(b) Farmer families in which one or more of its members belong to the following categories:
-- Former and present holders of constitutional posts.
-- Former and present Ministers / State Ministers and former / present Members of Lok Sabha / Rajya Sabha / State Legislative Assemblies / State Legislative Councils, former and present Mayors of Municipal Corporations, former and present Chairpersons of District Panchayats.
-- All serving or retired officers and employees of Central / State Government Ministries / Offices / Departments and their field units, Central or State PSEs and Attached offices / Autonomous Institutions under Government as well as regular employees of the Local Bodies (Excluding Multi Tasking Staff / Class IV / Group D employees).
-- All superannuated / retired pensioners whose monthly pension is Rs.10,000/- or more (Excluding Multi Tasking Staff / Class IV / Group D employees).
-- All Persons who paid Income Tax in last assessment year.
-- Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with Professional bodies and carrying out profession by undertaking practices.
-(c) In case of new beneficiaries being uploaded on the PM-KISAN Portal, all land holding farmers’ families who are Non-resident Indians (NRIs) in terms of the provisions of the Income Tax Act, 1961.
-(d) In cases of cultivable land transferred to other persons through Sale Deed, Partition Deed, Gift Deed, etc. after 01.02.2019, the transferee will not be eligible under the Scheme. (However, the transferor of the land will also become ineligible if the family of the transferor does not have any cultivable land subsequent to such a transfer).
-
-Please note that this list may be incomplete and you should verify it on the official portal.
-
-Sources: [pmkisan_guidelines_rev2020.pdf, page 2-3], [pmkisan_guidelines_rev2020.pdf, page 4]"
-cutoff,What is the cut-off date for eligibility?,PASS,"The cut-off date for determination of eligibility of beneficiaries under the scheme is 01.02.2019, and no changes thereafter shall be considered for eligibility of benefit under the scheme for the next 5 years. However, this date is not applicable when the transfer of ownership of cultivable land takes place on account of succession due to death.
-
-[pmkisan_guidelines_rev2020.pdf, page 3]"
-cutoff_land_after,My land came to me after the cut-off date. Can I still get PM-KISAN?,MANUAL,"Yes, you can still get PM-KISAN benefits if the transfer of ownership of cultivable land took place after the cut-off date due to the following specific rules:
-
-* **Succession due to death:** If land ownership was transferred due to succession on account of the death of the landowner after the cut-off date (01.02.2019), the family of the successors would be entitled to the benefits, provided they are otherwise eligible as per the scheme guidelines. 
-* **Land records entered between December 1, 2018, and February 1, 2019:** Eligible farmers whose names were entered in the land record after 01.12.2018 till 01.02.2019 are eligible for benefits from the date of entry of land rights in the land records. For transfers between 01.12.2018 and 31.01.2019 (due to purchase, succession, will, gift, etc.), a proportionate amount of the installment is given from the date of transfer till 31.03.2019.
-* **Transfers other than death after February 1, 2019:** If cultivable land was transferred to other persons through Sale Deed, Partition Deed, Gift Deed, etc., after 01.02.2019, the transferee will not be eligible under the scheme because they were not the land owner as on 01.02.2019.
-
-[pmkisan_guidelines_rev2020.pdf, page 3-5]
-
-Please note that this list of rules and conditions may be incomplete, and you should verify it on the official portal."
-aadhaar,Is Aadhaar compulsory for PM-KISAN?,PASS,"Yes, Aadhaar is compulsory for the PM-KISAN scheme. For the first installment, Aadhaar is collected where available or alternate documents are used, but all beneficiaries must be enrolled under Aadhaar because payment of the third installment onwards is done only on the basis of Aadhaar seeded database (and Aadhaar is compulsory for the release of the second installment onwards). Additionally, from the December 2019 – March 2020 trimester onwards, States must ensure Aadhaar-linked bank accounts for the beneficiaries. 
-
-However, an exemption from the requirement of Aadhaar number and Aadhaar-seeded database was given to the States of Assam, Meghalaya, and Jammu & Kashmir till 31.3.2021 to complete their Aadhaar enrolment.
-
-Sources: [pmkisan_amendment_para8.pdf, page 1], [pmkisan_guidelines_rev2020.pdf, page 6, 10-11]
-
-Note: This list of rules or conditions may be incomplete. You should verify it on the official portal."
-taxpayers,Do income tax payers get PM-KISAN benefits?,PASS,"No, persons who paid Income Tax in the last assessment year are excluded and shall not be eligible for benefits under the PM-KISAN scheme [pmkisan_guidelines_rev2020.pdf, page 2-3].
-
-Please note that this list of rules or conditions may be incomplete and you should verify it on the official portal.
-
-Sources:
-[pmkisan_guidelines_rev2020.pdf, page 2-3]"
-taxpayers_rephrased,I pay income tax. Can I still get PM-KISAN?,PASS,"Based on the scheme guidelines, all persons who paid income tax in the last assessment year are excluded from the scheme and are not eligible to receive benefits under PM-KISAN.
-
-Sources: [pmkisan_guidelines_rev2020.pdf, page 2-3]
-
-Please note that this list of rules or conditions may be incomplete, and you should verify it on the official portal."
-pensioners,Are retired pensioners eligible for PM-KISAN?,PASS,"All superannuated or retired pensioners whose monthly pension is Rs. 10,000/- or more (excluding Multi Tasking Staff, Class IV, or Group D employees) are excluded and not eligible for benefits under the scheme [pmkisan_guidelines_rev2020.pdf, page 2-3]. 
-
-Note: This list of rules or conditions may be incomplete, and you should verify it on the official portal."
-pensioners_rephrased,My father is retired and gets a pension. Is he eligible for PM-KISAN?,PASS,"Based on the scheme guidelines, the following categories of beneficiaries are excluded and shall not be eligible for benefits under the PM-KISAN scheme:
-
-* All superannuated or retired pensioners whose monthly pension is Rs. 10,000/- or more (excluding Multi Tasking Staff / Class IV / Group D employees).
-
-Please note that this list of rules or conditions may be incomplete, and you should verify it on the official portal.
-
-Sources: [pmkisan_guidelines_rev2020.pdf, page 2-3]"
-false_declaration,What happens if a farmer gives an incorrect self declaration?,PASS,"Under the scheme, if a beneficiary gives an incorrect self-declaration, they shall be liable for the recovery of the transferred financial benefit and other penal actions as per the law.
-
-Source: [pmkisan_guidelines_rev2020.pdf, page 3]
-
-Please note that this list of rules or conditions may be incomplete, and you should verify it on the official portal."
-nri,Are NRIs eligible for PM-KISAN?,PASS,"Based on the documents provided, Non-resident Indians (NRIs) in terms of the provisions of the Income Tax Act, 1961 who are new beneficiaries being uploaded on the PM-KISAN Portal shall be excluded from any benefit under the Scheme.
-
-Note: This list of rules or conditions may be incomplete. Please verify it on the official portal.
-
-Sources: [pmkisan_guidelines_rev2020.pdf, page 3]"
-who_identifies,Who identifies the eligible farmer families?,MANUAL,"The responsibility of identifying the land holder farmer family eligible for benefit under the scheme lies with the State or UT Government.
-
-[pmkisan_guidelines_rev2020.pdf, page 6]"
-installments,"How often do I get the PM-KISAN money, and how much comes each time?",PASS,"Under the PM-KISAN scheme, you get an amount of Rs. 6000/- per year. This financial benefit is released in three installments of Rs. 2000/- each every 4 months (trimester), which are April-July, August-November, and December-March.
-
-Sources:
-[pmkisan_guidelines_rev2020.pdf, page 2]
-[pmkisan_guidelines_rev2020.pdf, page 10]
-
-Please note that this list of rules or conditions may be incomplete, and you should verify it on the official portal."
-family_definition,"When PM-KISAN says farmer family, who in my family does that include?",PASS,"Under the PM-KISAN scheme, a landholder farmer’s family is defined as a family comprising of husband, wife, and minor children who own cultivable land as per the land records of the concerned State or UT.
+Source: [pmkisan_guidelines_rev2020.pdf, page 2]"
+money_rephrased,PM-KISAN,"Under the PM-KISAN scheme, an amount of Rs. 6000/- per year is released by the Central Government online directly into the bank accounts of eligible farmers [pmkisan_guidelines_rev2020.pdf, page 2].
 
 Sources: [pmkisan_guidelines_rev2020.pdf, page 2]"
-inheritance_after_death,"If the landowner in my family dies, can the family still get PM-KISAN?",MANUAL,"Yes, the family can still get the benefits under the PM-KISAN scheme if the land ownership is transferred due to succession on account of the death of the land owner, provided they meet the scheme guidelines and exclusion clauses. 
-
-Here are the details regarding this:
-* In cases where the land records have not been updated for rights accruing due to succession on account of the death of land owners before 01.12.2018, States may update the land records in a time-bound manner. The successors whose names are entered in the land records will be eligible subject to fulfilling other conditions and exclusion clauses.
-* Clause 5.3 of the Operational Guidelines (which provides for a proportionate amount of financial benefit for transfers between 01.12.2018 and 31.01.2019) remains applicable to cases of succession as well.
-* For changes in ownership subsequent to 01.02.2019 due to inheritance resulting from the death of the land owner, the family of the successors is entitled to the benefits if they are otherwise eligible as per the scheme guidelines.
-* If the family of the deceased land owner is still eligible (where the spouse or minor children have cultivable land and are eligible as per guidelines), the details of the new beneficiary along with fresh self-declarations must be provided to the authorities for inclusion or modification so that the benefits to the survivors can continue.
-
-Source: [pmkisan_guidelines_rev2020.pdf, page 3-4]
-
-Please note that this list of rules or conditions may be incomplete, and you should verify it on the official portal."
-land_sale_or_gift,"If land is transferred to me by sale or gift after the cut-off date, can I get PM-KISAN?",MANUAL,"Based on the provided documents, if cultivable land is transferred to other persons through Sale Deed, Gift Deed, etc. after the cut-off date of 01.02.2019, the transferee will not be eligible under the Scheme because he or she was not the land owner as on 01.02.2019.
-
-Sources: [pmkisan_guidelines_rev2020.pdf, page 4], [pmkisan_guidelines_rev2020.pdf, page 4-5]"
-state_uploads,"Who uploads my details for PM-KISAN, and what details must be correct?",MANUAL,"Based on the provided documents, the State / UT Governments are responsible for identifying the beneficiaries and uploading their details on the web portal of the scheme. 
-
-Additionally, the State / UT Governments must ensure the **correctness of beneficiary details**, and they should also ensure speedy reconciliation in case of wrong or incomplete bank details of the beneficiary.
-
-Sources: [pmkisan_guidelines_rev2020.pdf, page 8, 11]"
-appeal_if_excluded,"If my name is missing from the list of eligible PM-KISAN farmers, can I appeal or submit my case?",MANUAL,"Yes. Farmers’ families who are eligible but have been excluded should be provided an opportunity to represent their case [pmkisan_guidelines_rev2020.pdf, page 7].
-
-Source: [pmkisan_guidelines_rev2020.pdf, page 7]
-
-Note: This list of rules or conditions may be incomplete. You should verify it on the official portal."
-refuse_solar_pump,Will PM-KISAN give me money to buy a solar water pump?,PASS,I could not find this in the documents I have.
-refuse_kcc_limit,What is the maximum Kisan Credit Card loan limit I can get?,PASS,I could not find this in the documents I have.
-exclusions_v3,Who is not allowed to take PM-KISAN?,PASS,"Under the PM-KISAN scheme, the following categories of beneficiaries of higher economic status are excluded and shall not be eligible for benefits:
+exclusions,PM-KISAN,"Under the PM-KISAN scheme, the following categories of beneficiaries of higher economic status are excluded:
 
 (a) All Institutional Land holders; and  
 (b) Farmer families in which one or more of its members belong to the following categories:  
@@ -133,15 +15,228 @@ iii) All serving or retired officers and employees of Central / State Government
 iv) All superannuated / retired pensioners whose monthly pension is Rs.10,000/- or more (Excluding Multi Tasking Staff / Class IV / Group D employees)  
 v) All Persons who paid Income Tax in last assessment year  
 vi) Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with Professional bodies and carrying out profession by undertaking practices  
-(c) In case of new beneficiaries being uploaded on the PM-KISAN Portal, all land holding farmers’ families who are Non-resident Indians (NRIs) in terms of the provisions of the Income Tax Act, 1961.  
 
-Additionally, in cases of cultivable land transferred to other persons through Sale Deed, Partition Deed, Gift Deed, etc. after 01.02.2019, the transferee will not be eligible under the Scheme as he / she was not the land owner as on 01.02.2019.
+Additionally, in case of new beneficiaries being uploaded on the PM-KISAN Portal, all land holding farmers’ families who are Non-resident Indians (NRIs) in terms of the provisions of the Income Tax Act, 1961 shall also be excluded from any benefit under the Scheme. Furthermore, in cases of cultivable land transferred to other persons through Sale Deed, Partition Deed, Gift Deed, etc. after 01.02.2019, the transferee will not be eligible under the Scheme.
+
+Please note that this list of rules or conditions may be incomplete, and you should verify it on the official portal.
+
+Sources: [pmkisan_guidelines_rev2020.pdf, page 2-3], [pmkisan_guidelines_rev2020.pdf, page 4-5]"
+exclusions_rephrased,PM-KISAN,"Based on the provided documents, the following categories of farmers are not eligible for benefits under the PM-KISAN scheme:
+
+(a) All Institutional Land holders.
+(b) Farmer families in which one or more of its members belong to the following categories:
+- Former and present holders of constitutional posts.
+- Former and present Ministers / State Ministers and former / present Members of Lok Sabha / Rajya Sabha / State Legislative Assemblies / State Legislative Councils, former and present Mayors of Municipal Corporations, former and present Chairpersons of District Panchayats.
+- All serving or retired officers and employees of Central / State Government Ministries / Offices / Departments and their field units, Central or State PSEs and Attached offices / Autonomous Institutions under Government as well as regular employees of the Local Bodies (Excluding Multi Tasking Staff / Class IV / Group D employees).
+- All superannuated / retired pensioners whose monthly pension is Rs.10,000/- or more (Excluding Multi Tasking Staff / Class IV / Group D employees).
+- All Persons who paid Income Tax in the last assessment year.
+- Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with Professional bodies and carrying out profession by undertaking practices.
+(c) In the case of new beneficiaries being uploaded on the PM-KISAN Portal, all land-holding farmers’ families who are Non-resident Indians (NRIs) in terms of the provisions of the Income Tax Act, 1961.
+
+Additionally, in cases of cultivable land transferred to other persons through Sale Deed, Partition Deed, Gift Deed, etc. after 01.02.2019, the transferee will not be eligible under the Scheme because they were not the land owner as on 01.02.2019. The transferor of the land will also become ineligible if their family does not have any cultivable land subsequent to such a transfer.
+
+Please note that this list may be incomplete, and you should verify it on the official portal.
+
+Sources:
+[pmkisan_guidelines_rev2020.pdf, page 2-3]
+[pmkisan_guidelines_rev2020.pdf, page 4]"
+cutoff,PM-KISAN,"Under the PM-KISAN scheme, the cut-off date for the determination of eligibility of beneficiaries is 01.02.2019, and no changes after that date will be considered for eligibility for the next 5 years (except when ownership transfer takes place due to succession from death).
+
+Sources: [pmkisan_guidelines_rev2020.pdf, page 3]"
+cutoff_land_after,PM-KISAN,"Yes, you can still get the benefits under certain conditions:
+
+1. **Succession due to death:** If the transfer of ownership of cultivable land takes place on account of succession due to the death of the landowner (even after the cut-off date of 01.02.2019), the family of the successors is entitled to the benefits, provided they are otherwise eligible as per the scheme guidelines. 
+2. **Transfer between 01.12.2018 and 31.01.2019:** If the transfer of ownership of cultivable land happened due to any reason such as purchase, succession, will, gift, etc., between 01.12.2018 and 31.01.2019, you will get a proportionate amount of the installment from the date of transfer till 31.03.2019.
+3. **Land records updated between 01.12.2018 and 01.02.2019:** Eligible farmers whose names have been entered in the land record after 01.12.2018 till 01.02.2019 shall be eligible for the benefits from the date of entry of land rights in the land records.
+
+However, if cultivable land was transferred to other persons through Sale Deed, Partition Deed, Gift Deed, etc., *subsequent to* 01.02.2019, the transferee will not be eligible under the scheme because they were not the land owner as on 01.02.2019.
+
+Please note that this list of conditions may be incomplete and you should verify it on the official portal.
+
+Sources:
+- [pmkisan_guidelines_rev2020.pdf, page 3]
+- [pmkisan_guidelines_rev2020.pdf, page 3-4]
+- [pmkisan_guidelines_rev2020.pdf, page 4]
+- [pmkisan_guidelines_rev2020.pdf, page 5]"
+aadhaar,PM-KISAN,"Yes, Aadhaar is compulsory for receiving payments under the PM-KISAN scheme, as payments from the third installment onwards (and for the December, 2019 – March, 2020 trimester onwards) are done only on the basis of an Aadhaar-seeded database. However, Aadhaar number is compulsory for the release of the second installment onwards. Additionally, the States of Assam, Meghalaya, and Jammu & Kashmir have been given an exemption from the requirement of Aadhaar numbers and Aadhaar-seeded databases until March 31, 2021.
+
+Sources: [pmkisan_amendment_para8.pdf, page 1], [pmkisan_guidelines_rev2020.pdf, page 6], [pmkisan_guidelines_rev2020.pdf, page 10-11]"
+taxpayers,PM-KISAN,"No, persons who paid Income Tax in the last assessment year are not eligible for benefits under the PM-KISAN scheme [pmkisan_guidelines_rev2020.pdf, page 2-3]."
+taxpayers_rephrased,PM-KISAN,"Based on the documents, all persons who paid Income Tax in the last assessment year are excluded and shall not be eligible for benefits under the PM-KISAN scheme. Therefore, you cannot get PM-KISAN if you paid income tax.
+
+[pmkisan_guidelines_rev2020.pdf, page 2-3]
+
+Please note that this list of conditions may be incomplete and you should verify it on the official portal."
+pensioners,PM-KISAN,"Under the PM-KISAN scheme, all superannuated or retired pensioners whose monthly pension is Rs. 10,000/- or more (excluding Multi Tasking Staff, Class IV, or Group D employees) are excluded and shall not be eligible for benefits.
+
+Sources: [pmkisan_guidelines_rev2020.pdf, page 2-3]
+
+Please note that this list of rules or conditions may be incomplete, and you should verify it on the official portal."
+pensioners_rephrased,PM-KISAN,"Based on the provided documents, retired pensioners whose monthly pension is Rs. 10,000/- or more are not eligible for benefits under the scheme (excluding Multi Tasking Staff / Class IV / Group D employees). 
+
+[pmkisan_guidelines_rev2020.pdf, page 2-3]
+
+Please note that this list of conditions may be incomplete and you should verify it on the official portal."
+false_declaration,PM-KISAN,"If a farmer gives an incorrect self-declaration, the beneficiary shall be liable for the recovery of the transferred financial benefit and other penal actions as per law.
+
+Source: [pmkisan_guidelines_rev2020.pdf, page 3]
+
+Please note that this list of rules or conditions may be incomplete, and you should verify it on the official portal."
+nri,PM-KISAN,"No, Non-resident Indians (NRIs) in terms of the provisions of the Income Tax Act, 1961 who are new beneficiaries being uploaded on the PM-KISAN Portal are excluded from any benefit under the scheme.
+
+[pmkisan_guidelines_rev2020.pdf, page 3]"
+who_identifies,PM-KISAN,"Based on the provided documents, the responsibility of identifying the land holder farmer family eligible for the benefit under the scheme belongs to the State / UT Government.
+
+[pmkisan_guidelines_rev2020.pdf, page 6]"
+installments,PM-KISAN,"You will get an amount of Rs. 6,000/- per year, released in three installments of Rs. 2,000/- each every 4 months (trimester) during the periods of April–July, August–November, and December–March.
+
+Sources: [pmkisan_guidelines_rev2020.pdf, page 10]"
+family_definition,PM-KISAN,"Under the PM-KISAN scheme, a landholder farmer's family is defined as a family consisting of:
+
+* Husband
+* Wife
+* Minor children
+
+who own cultivable land as per the land records of the concerned State or Union Territory.
+
+[pmkisan_guidelines_rev2020.pdf, page 2]"
+inheritance_after_death,PM-KISAN,"Yes, the family can still get the PM-KISAN benefits if ownership of the cultivable land is transferred on account of succession due to the death of the landowner, subject to fulfilling the other conditions of the scheme and the exclusion clauses. 
+
+Here are the rules regarding this situation:
+- Benefit will be allowed in cases where the transfer of ownership of cultivable land takes place due to succession resulting from the death of the landowner.
+- In cases where land records have not been updated for rights accruing due to succession before 01.12.2018, the States may update the land records in a time-bound manner, and the successors whose names are entered in the land records will be eligible.
+- Subsequent to 01.12.2019, in case of transfer of ownership due to inheritance resulting from the death of the land owner, the family of the successors will be entitled to the benefits if otherwise eligible as per the scheme guidelines.
+- If the family of the deceased land owner is still eligible (where the spouse or minor children have cultivable land and are eligible as per the guidelines), the details of the new beneficiary along with fresh self-declarations must be provided to the concerned authorities for inclusion or modification so that the benefits can continue.
+- In cases of transfer of land ownership due to inheritance, the eligibility of the family under PM-KISAN is reassessed. If the family is no longer eligible, it is updated in the PM-KISAN portal to discontinue benefits. If freshly eligible after inheritance, details must be incorporated in the database so that benefits start accruing from the date when inheritance became operational.
+
+Please note that this list of rules and conditions may be incomplete, and you should verify it on the official portal.
+
+Sources:
+- [pmkisan_guidelines_rev2020.pdf, page 3-4]
+- [pmkisan_guidelines_rev2020.pdf, page 4-5]"
+land_sale_or_gift,PM-KISAN,"If cultivable land is transferred to other persons through Sale Deed, Gift Deed, etc., after the cut-off date (01.02.2019), the transferee will not be eligible under the Scheme as he or she was not the land owner as on 01.02.2019. 
+
+Sources: [pmkisan_guidelines_rev2020.pdf, page 4-5]"
+state_uploads,PM-KISAN,"Based on the provided documents:
+
+* **Who uploads your details:** The State and Union Territory (UT) Governments are responsible for identifying beneficiaries and uploading their details on the web portal of the scheme.
+* **What details must be correct:** The State / UT Governments must ensure the **correctness of beneficiary details** (specifically, speedy reconciliation must also be ensured in case of wrong or incomplete bank details). 
+
+Sources: [pmkisan_guidelines_rev2020.pdf, page 8, 11]"
+appeal_if_excluded,PM-KISAN,"Yes, farmers' families who are eligible but have been excluded should be provided an opportunity to represent their case [pmkisan_guidelines_rev2020.pdf, page 7]. Additionally, the States shall notify State and District Level Grievance Redressal Monitoring Committees to look into all grievances related to the implementation of the scheme, and any received complaints should be disposed of on merit, preferably within two weeks time [pmkisan_guidelines_rev2020.pdf, page 7].
+
+Please note that this list of rules or conditions may be incomplete and you should verify it on the official portal.
+
+Sources: [pmkisan_guidelines_rev2020.pdf, page 7]"
+refuse_solar_pump,PM-KISAN,I could not find this in the documents I have.
+refuse_kcc_limit,PM-KISAN,I could not find this in the documents I have.
+exclusions_v3,PM-KISAN,"Under the PM-KISAN scheme, the following categories of beneficiaries of higher economic status are excluded and not eligible for the benefits:
+
+(a) All Institutional Land holders.
+
+(b) Farmer families in which one or more of its members belong to the following categories:
+- Former and present holders of constitutional posts.
+- Former and present Ministers / State Ministers and former / present Members of Lok Sabha / Rajya Sabha / State Legislative Assemblies / State Legislative Councils, former and present Mayors of Municipal Corporations, former and present Chairpersons of District Panchayats.
+- All serving or retired officers and employees of Central / State Government Ministries / Offices / Departments and their field units, Central or State PSEs and Attached offices / Autonomous Institutions under Government as well as regular employees of the Local Bodies (Excluding Multi Tasking Staff / Class IV / Group D employees).
+- All superannuated / retired pensioners whose monthly pension is Rs.10,000/- or more (Excluding Multi Tasking Staff / Class IV / Group D employees).
+- All Persons who paid Income Tax in the last assessment year.
+- Professionals like Doctors, Engineers, Lawyers, Chartered Accountants, and Architects registered with Professional bodies and carrying out profession by undertaking practices.
+
+(c) All landholding farmers' families who are Non-resident Indians (NRIs) in terms of the provisions of the Income Tax Act, 1961 (in case of new beneficiaries being uploaded on the PM-KISAN Portal).
+
+Please note that this list of rules or conditions may be incomplete and you should verify it on the official portal.
+
+Sources: [pmkisan_guidelines_rev2020.pdf, page 2-3]"
+appeal_v2,PM-KISAN,"According to the scheme guidelines, the lists of eligible beneficiaries are published at the village level. Farmer families who are eligible but have been excluded should be provided an opportunity to represent their case.
+
+Source: [pmkisan_guidelines_rev2020.pdf, page 7]
+
+Please note that this list of conditions or rules may be incomplete, and you should verify it on the official portal."
+pmfby_risks,PMFBY,"Under the Pradhan Ntri Fasal Bima Yojana (PMFBY), the risks covered include:
+
+1. **Basic Cover (Yield loss to standing crops from sowing to harvesting against non-preventable risks):**
+   - Drought
+   - Dry spells
+   - Flood
+   - Inundation
+   - Wide-spread pest and disease attack
+   - Landslides
+   - Natural fire due to lightening
+   - Storm
+   - Hailstorm
+   - Cyclone
+
+2. **Add-On Covers (based on the need of the specific crop/area, chosen by State Governments/UT Administrations in consultation with SLCCCI):**
+   - Prevented Sowing/Planting/Germination Risk
+   - Crop Loss due to Attack by Wild Animals
+
+[pmfby_guidelines.pdf, page 17, 168]
+
+*Note: The list of covered risks may be incomplete, and you should verify it on the official portal.*"
+pmfby_premium,PMFBY,"The maximum premium rate payable by a farmer as a percentage of the Sum Insured (SI) or Actuarial rate (whichever is less) is:
+
+* **Kharif Season:** All Food grain and Oilseeds crops (all Cereals, Millets, Pulses and Oilseeds crops) — 2.0% of SI
+* **Rabi Season:** All Food grain and Oilseeds crops (all Cereals, Millets, Pulses and Oilseeds crops) — 1.5% of SI
+* **Kharif and Rabi Seasons:** Annual Commercial/ Annual Horticultural crops — 5% of SI
+* **Perennial horticultural / commercial crops (pilot basis):** 5% of SI
+
+*(Note: Premium paid by non-loanee farmers should be rounded off to the nearest Rupee.)*
 
 Please note that this list may be incomplete and you should verify it on the official portal.
 
-[pmkisan_guidelines_rev2020.pdf, page 2-3, 4]"
-appeal_v2,What can I do if the officials left my name out?,MANUAL,"Based on the provided document, if you are an eligible farmer whose name has been excluded, you should be provided an opportunity to represent your case.
+[pmfby_guidelines.pdf, page 47-48]"
+pmfby_cutoff,PMFBY,"Based on the provided documents, the last date to enrol for crop insurance depends on the crop season and notifications:
 
-Sources: [pmkisan_guidelines_rev2020.pdf, page 7]
+- **For Kharif season:** Up to the last date of enrolment of farmers as notified by the State/UTs for notified crop(s), or up to 15th July of the current year (State/UTs may fix earlier dates for early Kharif crops).
+- **For Rabi season:** Up to the last date of enrolment of farmers as notified by the State/UTs for notified crop(s), or up to 15th December of the current year (State/UTs may fix earlier dates for early Rabi crops).
+- The cut-off date for enrolment shall solely be based on the dates notified by the States/UTs and digitized on the National Crop Insurance Portal (NCIP) for the notified crops and season.
 
-Please note that this list of rules or conditions may be incomplete and you should verify it on the official portal."
+Please note that this list may be incomplete and you should verify it on the official portal.
+
+[pmfby_guidelines.pdf, page 53, 60-61]"
+pmfby_report_loss,PMFBY,"Based on the provided documents, crop damage from hailstorm or flooding is covered under specific risks and localized calamities as follows:
+
+* **Prevented Sowing/Planting/Germination Risk:** Insured area is prevented from sowing, planting, or germination due to deficit rainfall or adverse seasonal or climatic conditions.
+* **Mid-Season Adversity:** Loss caused by adverse seasonal conditions during the crop season such as floods, prolonged dry spells, and severe drought, where the expected yield is likely to be less than 50% of the normal yield. This provides immediate relief (On-Account payment) to insured farmers.
+* **Post-Harvest Losses:** Coverage is available for up to a maximum of two weeks from harvesting for crops that need to be dried in cut and spread or small bundled conditions and left in the field, against specific perils including hailstorms, cyclones, cyclonic rains, and unseasonal rains.
+* **Localized Calamities:** Loss or damage to notified insured crops resulting from identified localized risks such as hailstorms, landslides, inundation, cloud bursts, and natural fires due to lightning affecting isolated farms in the notified area.
+
+[pmfby_guidelines.pdf, page 17]"
+pmfby_eligibility,PMFBY,"Based on the provided documents, the following groups can enroll for PMFBY:
+
+1. **Loanee Farmers:** Farmers availing Kisan Credit Card (KCC) loans for notified crops can enroll (enrollment is mandatory unless they submit a signed declaration to opt out at least 7 days before the cut-off date).
+2. **Non-Loanee Farmers:** Non-loanee farmers can enroll directly through insurance companies, via the National Crop Insurance Portal (NCIP), the Crop Insurance App, or through networks like Common Service Centers (CSCs).
+
+Sources: 
+- [pmfby_guidelines.pdf, page 28]
+- [pmfby_guidelines.pdf, page 64]
+- [pmfby_guidelines.pdf, page 66]
+- [pmfby_guidelines.pdf, page 155]
+
+Note: This list may be incomplete, and you should verify it on the official portal."
+pmfby_flood_rephrased,PMFBY,"Yes, you can get insurance money for crop damage caused by a flood under localized calamities, as inundation (where the insured field is covered or submerged by water due to flood water from local water bodies or rise in water level, staying for a prolonged period and causing visible damage) is covered. 
+
+To be eligible for financial support, you must meet the following conditions:
+* The add-on cover for localized calamity must be notified by the State/UT Government.
+* You must be an insured farmer at the farm unit level, affected by the specified peril in a Notified Insurance Unit (IU) growing notified crops for which insurance has been availed.
+* The crop must be a notified crop declared eligible for localized calamity losses and damaged by the specified peril while in a standing condition up till harvesting.
+* You must have paid the premium (meaning the premium has been debited from your account before the occurrence of the insured peril).
+* Intimation of crop losses is compulsory for individual insured farmers through various channels.
+
+Sources: [pmfby_guidelines.pdf, page 102], [pmfby_guidelines.pdf, page 105]
+
+Note: The list of conditions above may be incomplete, and you should verify it on the official portal."
+pmfby_premium_rephrased,PMFBY,I could not find this in the documents I have.
+pmfby_loan_rephrased,PMFBY,"Yes, if you took a crop loan (Kisan Credit Card / KCC loan) for a notified crop in a notified area, you will be automatically covered for the season unless you submit a signed ""opt-out"" declaration to your bank branch at least 7 days before the cut-off date for enrolment and premium debiting. 
+
+Sources: [pmfby_guidelines.pdf, page 60, 155]
+
+Please note that this list of conditions may be incomplete and you should verify it on the official portal."
+pmfby_unseen_sowing,PMFBY,"Based on the provided documents, if your insured area is prevented from sowing, planting, or germination due to deficit rainfall or adverse seasonal/climatic conditions, it is covered under the ""Prevented Sowing/Planting/Germination Risk"" add-on coverage. 
+
+Source: [pmfby_guidelines.pdf, page 17]"
+pmfby_unseen_postharvest,PMFBY,"Yes, post-harvest losses are covered against specific perils such as unseasonal rains, cyclonic rains, hailstorms, and cyclones. This coverage is available for a maximum period of two weeks from harvesting, for crops that need to be dried in cut and spread or small, bundled condition left in the field after harvesting. 
+
+Sources: [pmfby_guidelines.pdf, page 17]
+
+Please note that this list of rules or conditions may be incomplete, and you should verify it on the official portal."
