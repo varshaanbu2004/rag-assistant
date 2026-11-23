@@ -56,10 +56,17 @@ if question:
 
         st.markdown(answer)
         if hits:
-            st.caption("Cited sources:")
-            for _, meta in hits:
-                p = meta["page"] if meta["page"] == meta["page_end"] else f"{meta['page']}-{meta['page_end']}"
-                st.caption(f"- {meta['source']}, page {p}")
+            # Deduplicate by (source, page) so repeated chunks from merge don't spam the list
+            seen, uniq = set(), []
+            for meta in hits:
+                key = (meta["source"], meta["page"] if meta["page"] == meta["page_end"] else f"{meta['page']}-{meta['page_end']}")
+                if key not in seen:
+                    seen.add(key)
+                    uniq.append(meta)
+            with st.expander("Passages retrieved (not all used in the answer)", expanded=False):
+                for meta in uniq:
+                    p = meta["page"] if meta["page"] == meta["page_end"] else f"{meta['page']}-{meta['page_end']}"
+                    st.caption(f"- {meta['source']}, page {p}")
         st.caption("Documents are from 2020 and 2023. Verify on the official portal.")
 
     st.session_state.messages.append({"role": "assistant", "content": answer})
