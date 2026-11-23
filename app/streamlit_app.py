@@ -58,7 +58,7 @@ if question:
         if hits:
             # Deduplicate by (source, page) so repeated chunks from merge don't spam the list
             seen, uniq = set(), []
-            for meta in hits:
+            for _,meta in hits:
                 key = (meta["source"], meta["page"] if meta["page"] == meta["page_end"] else f"{meta['page']}-{meta['page_end']}")
                 if key not in seen:
                     seen.add(key)
