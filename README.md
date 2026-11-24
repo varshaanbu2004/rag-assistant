@@ -62,7 +62,12 @@ A Gemini key is required. Set it as GOOGLE_API_KEY in the environment or in a lo
 
 ## Live demo
 
-https://rural-scheme-advisor.streamlit.app/
+Hosted on Streamlit Community Cloud's free tier: https://rural-scheme-advisor.streamlit.app
+The first load after inactivity can take several minutes, because the app rebuilds its search index. It may also be asleep. The local demo below shows the app working.
+
+## Local demo
+
+![Local demo](docs/demo_local.png)
 
 ## Architecture diagram
 
