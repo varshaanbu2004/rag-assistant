@@ -47,6 +47,8 @@ Current test set (39 questions), combined retrieval:
 - Documents are from 2020 (PM-KISAN) and 2023 (PMFBY); rules may be outdated, so answers carry a "verify on the official portal" note
 - Questions that do not name a scheme use a per-scheme fallback search; PMFBY with no scheme is weaker (70 percent in the forced test), and users can pick the scheme in the sidebar
 - PMFBY answers were checked by manual review only
+- If an answer says not found, choose the scheme in the sidebar.
+- The first load after inactivity can take several minutes, because the app rebuilds its search index
 
 ## Run locally
 
@@ -60,7 +62,7 @@ A Gemini key is required. Set it as GOOGLE_API_KEY in the environment or in a lo
 
 ## Live demo
 
-LIVE_LINK_HERE
+https://rural-scheme-advisor.streamlit.app/
 
 ## Architecture diagram
 
