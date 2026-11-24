@@ -71,4 +71,17 @@ The first load after inactivity can take several minutes, because the app rebuil
 
 ## Architecture diagram
 
-TODO
+```mermaid
+flowchart TD
+    A["Official PDFs: PM-KISAN, PMFBY"] --> B["ingest.py: clean text, ~800 character chunks with overlap"]
+    B --> C["build_index.py: embeddings stored in ChromaDB with scheme field"]
+    Q["Farmer question"] --> S["Scheme: sidebar choice or detect_scheme"]
+    S --> R["rewrite.py: Gemini rewrites question in document wording, cached"]
+    S --> H["hybrid.py: vector search + BM25 keyword union + neighbor expansion"]
+    R --> H
+    C --> H
+    H --> M["Merge and deduplicate chunks from original and rewritten question"]
+    M --> P["ask.py: strict prompt, use only the context, cite file and page"]
+    P --> G["Gemini answer, or: I could not find this in the documents I have"]
+    G --> U["Streamlit app: answer, sources, verify on official portal note"]
+```
