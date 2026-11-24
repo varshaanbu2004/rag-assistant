@@ -73,15 +73,15 @@ The first load after inactivity can take several minutes, because the app rebuil
 
 ```mermaid
 flowchart TD
-    A["Official PDFs: PM-KISAN, PMFBY"] --> B["ingest.py: clean text, ~800 character chunks with overlap"]
-    B --> C["build_index.py: embeddings stored in ChromaDB with scheme field"]
-    Q["Farmer question"] --> S["Scheme: sidebar choice or detect_scheme"]
-    S --> R["rewrite.py: Gemini rewrites question in document wording, cached"]
-    S --> H["hybrid.py: vector search + BM25 keyword union + neighbor expansion"]
-    R --> H
-    C --> H
-    H --> M["Merge and deduplicate chunks from original and rewritten question"]
-    M --> P["ask.py: strict prompt, use only the context, cite file and page"]
-    P --> G["Gemini answer, or: I could not find this in the documents I have"]
-    G --> U["Streamlit app: answer, sources, verify on official portal note"]
+    pdfs[Official PDFs for PM-KISAN and PMFBY] --> ingest[ingest.py cleans text and makes chunks]
+    ingest --> index[build_index.py stores embeddings in ChromaDB]
+    question[Farmer question] --> scheme[Scheme chosen in sidebar or detected]
+    scheme --> rewrite[rewrite.py rewrites the question with Gemini]
+    scheme --> search[hybrid.py vector search, BM25 keyword search, neighbor chunks]
+    rewrite --> search
+    index --> search
+    search --> merge[Merge and deduplicate chunks]
+    merge --> prompt[ask.py strict prompt, use only the context, cite file and page]
+    prompt --> answer[Gemini answer or I could not find this in the documents I have]
+    answer --> app[Streamlit app shows answer, sources and verify note]
 ```
